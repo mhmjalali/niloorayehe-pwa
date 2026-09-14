@@ -5,15 +5,36 @@ import { getTranslations, setRequestLocale } from "next-intl/server";
 import localFont from "next/font/local";
 import { localeConfig, routing } from "@/i18n/routing";
 import { RegisterSW } from "@/app/register-sw";
+import { BottomNav } from "@/components/main/bottom-nav";
 import "@/styles/global.css";
 
 const iranYekan = localFont({
   src: [
-    { path: "../fonts/iranyekan/IRANYekanLight.ttf", weight: "300", style: "normal" },
-    { path: "../fonts/iranyekan/IRANYekanRegular.ttf", weight: "400", style: "normal" },
-    { path: "../fonts/iranyekan/IRANYekanMedium.ttf", weight: "500", style: "normal" },
-    { path: "../fonts/iranyekan/IRANYekanBold.ttf", weight: "700", style: "normal" },
-    { path: "../fonts/iranyekan/IRANYekanExtraBold.ttf", weight: "800", style: "normal" },
+    {
+      path: "../fonts/iranyekan/IRANYekanLight.ttf",
+      weight: "300",
+      style: "normal",
+    },
+    {
+      path: "../fonts/iranyekan/IRANYekanRegular.ttf",
+      weight: "400",
+      style: "normal",
+    },
+    {
+      path: "../fonts/iranyekan/IRANYekanMedium.ttf",
+      weight: "500",
+      style: "normal",
+    },
+    {
+      path: "../fonts/iranyekan/IRANYekanBold.ttf",
+      weight: "700",
+      style: "normal",
+    },
+    {
+      path: "../fonts/iranyekan/IRANYekanExtraBold.ttf",
+      weight: "800",
+      style: "normal",
+    },
   ],
   variable: "--font-iranyekan",
   display: "swap",
@@ -59,9 +80,12 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={direction} className={iranYekan.variable}>
-      <body className="min-h-full flex flex-col">
+      <body className="min-h-full flex flex-col pb-20">
         <RegisterSW />
-        <NextIntlClientProvider>{children}</NextIntlClientProvider>
+        <NextIntlClientProvider>
+          {children}
+          <BottomNav />
+        </NextIntlClientProvider>
       </body>
     </html>
   );

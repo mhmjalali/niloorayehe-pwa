@@ -2,9 +2,22 @@ import type { Metadata } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
+import localFont from "next/font/local";
 import { localeConfig, routing } from "@/i18n/routing";
 import { RegisterSW } from "@/app/register-sw";
 import "@/styles/global.css";
+
+const iranYekan = localFont({
+  src: [
+    { path: "../fonts/iranyekan/IRANYekanLight.ttf", weight: "300", style: "normal" },
+    { path: "../fonts/iranyekan/IRANYekanRegular.ttf", weight: "400", style: "normal" },
+    { path: "../fonts/iranyekan/IRANYekanMedium.ttf", weight: "500", style: "normal" },
+    { path: "../fonts/iranyekan/IRANYekanBold.ttf", weight: "700", style: "normal" },
+    { path: "../fonts/iranyekan/IRANYekanExtraBold.ttf", weight: "800", style: "normal" },
+  ],
+  variable: "--font-iranyekan",
+  display: "swap",
+});
 
 export function generateStaticParams() {
   return routing.locales.map((locale) => ({ locale }));
@@ -45,7 +58,7 @@ export default async function LocaleLayout({
   const { direction } = localeConfig[locale as keyof typeof localeConfig];
 
   return (
-    <html lang={locale} dir={direction}>
+    <html lang={locale} dir={direction} className={iranYekan.variable}>
       <body className="min-h-full flex flex-col">
         <RegisterSW />
         <NextIntlClientProvider>{children}</NextIntlClientProvider>

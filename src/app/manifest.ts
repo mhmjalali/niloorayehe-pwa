@@ -4,7 +4,7 @@ export default function manifest(): MetadataRoute.Manifest {
   return {
     name: "Niloo Rayehe",
     short_name: "Niloo Rayehe",
-    start_url: "/",
+    start_url: "/fa",
     display: "standalone",
     background_color: "#ffffff",
     theme_color: "#ffffff",

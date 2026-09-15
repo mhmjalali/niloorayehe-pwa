@@ -4,11 +4,18 @@ import createNextIntlPlugin from "next-intl/plugin";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
-  allowedDevOrigins: ["172.18.0.1"],
+  allowedDevOrigins: ["192.168.1.129"],
   turbopack: {
     rules: {
       "*.svg": {
-        loaders: ["@svgr/webpack"],
+        loaders: [
+          {
+            loader: "@svgr/webpack",
+            options: {
+              svgo: false,
+            },
+          },
+        ],
         as: "*.js",
       },
     },

@@ -1,4 +1,4 @@
-import type { Metadata } from "next";
+import type { Metadata, Viewport } from "next";
 import { notFound } from "next/navigation";
 import { hasLocale, NextIntlClientProvider } from "next-intl";
 import { getTranslations, setRequestLocale } from "next-intl/server";
@@ -55,7 +55,6 @@ export async function generateMetadata({
   return {
     title: t("title"),
     description: t("description"),
-    themeColor: "#ffffff",
     appleWebApp: {
       capable: true,
       statusBarStyle: "default",
@@ -63,6 +62,11 @@ export async function generateMetadata({
     },
   };
 }
+
+export const viewport: Viewport = {
+  themeColor: "#ffffff",
+  viewportFit: "cover",
+};
 
 export default async function LocaleLayout({
   children,
@@ -80,7 +84,7 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={direction} className={iranYekan.variable}>
-      <body className="min-h-full flex flex-col pb-20">
+      <body className="min-h-full flex flex-col pb-20 bg-background">
         <RegisterSW />
         <NextIntlClientProvider>
           {children}

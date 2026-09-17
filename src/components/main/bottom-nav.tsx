@@ -17,7 +17,7 @@ import { Link, usePathname } from "@/i18n/navigation";
 const NAV_ITEMS = [
   { href: "/", label: "خانه", Icon: HomeIcon, FillIcon: HomeFillIcon },
   {
-    href: "/store",
+    href: "/category",
     label: "دسته‌بندی",
     Icon: StoreIcon,
     FillIcon: StoreFillIcon,
@@ -47,7 +47,8 @@ export function BottomNav() {
   // grid-cols-5: items sit in columns 0,1,3,4 (column 2 is the empty center slot).
   // The bar is dir="rtl", so the first grid column renders visually rightmost —
   // flip the column index before turning it into a left-edge percentage.
-  const activeColumn = activeIndex === -1 ? -1 : activeIndex < 2 ? activeIndex : activeIndex + 1;
+  const activeColumn =
+    activeIndex === -1 ? -1 : activeIndex < 2 ? activeIndex : activeIndex + 1;
   const visualColumn = 4 - activeColumn;
   const indicatorLeft = ((visualColumn + 0.5) / 5) * 100;
 
@@ -160,7 +161,7 @@ export function BottomNav() {
         aria-label="دکمه مرکزی"
         whileTap={{ scale: 0.88 }}
         transition={{ type: "spring", stiffness: 500, damping: 15 }}
-        className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-1/2 flex h-14 w-14 items-center justify-center rounded-full bg-white/50 shadow-[0_6px_14px_rgba(0,0,0,0.18),inset_0_1px_1px_0_rgba(255,255,255,0.7),inset_0_-2px_3px_0_rgba(0,0,0,0.12)]"
+        className="-translate-x-1/2 -translate-y-1/2 absolute top-0 left-1/2 flex h-14 w-14 items-center justify-center rounded-full bg-white/50 shadow-[0_6px_14px_rgba(0,0,0,0.18),inset_0_1px_1px_0_rgba(255,255,255,0.7),inset_0_-2px_3px_0_rgba(0,0,0,0.12)] backdrop-blur-md"
       >
         <BagIcon className="h-6 w-6 text-primary" />
       </motion.button>

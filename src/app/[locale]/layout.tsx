@@ -89,7 +89,7 @@ export default async function LocaleLayout({
         <RegisterSW />
         <NextIntlClientProvider>
           <Header />
-          <div className="pt-33 pb-20">{children}</div>
+          <div>{children}</div>
           <BottomNav />
         </NextIntlClientProvider>
       </body>

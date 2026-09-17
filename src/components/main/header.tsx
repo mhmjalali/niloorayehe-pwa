@@ -5,7 +5,7 @@ import { SearchBar } from "@/components/main/search-bar";
 
 export function Header() {
   return (
-    <header className="fixed inset-x-0 top-0 z-50">
+    <header className="sticky top-0 z-50">
       <div
         aria-hidden="true"
         className="absolute inset-0 border-white border-b bg-white/50 backdrop-blur-md"

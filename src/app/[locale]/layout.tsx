@@ -6,6 +6,7 @@ import localFont from "next/font/local";
 import { localeConfig, routing } from "@/i18n/routing";
 import { RegisterSW } from "@/app/register-sw";
 import { BottomNav } from "@/components/main/bottom-nav";
+import { Header } from "@/components/main/header";
 import "@/styles/global.css";
 
 const iranYekan = localFont({
@@ -84,10 +85,11 @@ export default async function LocaleLayout({
 
   return (
     <html lang={locale} dir={direction} className={iranYekan.variable}>
-      <body className="min-h-full flex flex-col pb-20 bg-background">
+      <body className="min-h-full flex flex-col bg-background">
         <RegisterSW />
         <NextIntlClientProvider>
-          {children}
+          <Header />
+          <div className="pb-17">{children}</div>
           <BottomNav />
         </NextIntlClientProvider>
       </body>

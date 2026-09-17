@@ -8,3 +8,8 @@ export { default as StoreIcon } from "./store.svg";
 export { default as StoreFillIcon } from "./store-fill.svg";
 export { default as UserIcon } from "./user.svg";
 export { default as UserFillIcon } from "./user-fill.svg";
+export { default as BellIcon } from "./bell.svg";
+export { default as BellFillIcon } from "./bell-fill.svg";
+export { default as FilterIcon } from "./filter.svg";
+export { default as SearchIcon } from "./search.svg";
+export { default as SearchFillIcon } from "./search-fill.svg";

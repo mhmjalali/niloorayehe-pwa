@@ -1,0 +1,10 @@
+export { default as AcademyIcon } from "./academy.svg";
+export { default as AcademyFillIcon } from "./academy-fill.svg";
+export { default as BagIcon } from "./bag.svg";
+export { default as BagFillIcon } from "./bag-fill.svg";
+export { default as HomeIcon } from "./home.svg";
+export { default as HomeFillIcon } from "./home-fill.svg";
+export { default as StoreIcon } from "./store.svg";
+export { default as StoreFillIcon } from "./store-fill.svg";
+export { default as UserIcon } from "./user.svg";
+export { default as UserFillIcon } from "./user-fill.svg";

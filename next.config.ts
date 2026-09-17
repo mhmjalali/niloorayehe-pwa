@@ -4,7 +4,7 @@ import createNextIntlPlugin from "next-intl/plugin";
 const nextConfig: NextConfig = {
   /* config options here */
   reactCompiler: true,
-  allowedDevOrigins: ["192.168.1.129"],
+  allowedDevOrigins: ["10.72.99.210"],
   turbopack: {
     rules: {
       "*.svg": {

@@ -2,25 +2,55 @@
 
 import { motion } from "motion/react";
 import {
+  AcademyFillIcon,
   AcademyIcon,
   BagIcon,
+  HomeFillIcon,
   HomeIcon,
+  StoreFillIcon,
   StoreIcon,
+  UserFillIcon,
   UserIcon,
 } from "@/assets/icons";
-import { Link } from "@/i18n/navigation";
+import { Link, usePathname } from "@/i18n/navigation";
 
 const NAV_ITEMS = [
-  { href: "/", label: "خانه", Icon: HomeIcon },
-  { href: "/store", label: "فروشگاه", Icon: StoreIcon },
-  { href: "/academy", label: "آکادمی", Icon: AcademyIcon },
-  { href: "/profile", label: "پروفایل", Icon: UserIcon },
+  { href: "/", label: "خانه", Icon: HomeIcon, FillIcon: HomeFillIcon },
+  {
+    href: "/store",
+    label: "دسته‌بندی",
+    Icon: StoreIcon,
+    FillIcon: StoreFillIcon,
+  },
+  {
+    href: "/academy",
+    label: "آکادمی",
+    Icon: AcademyIcon,
+    FillIcon: AcademyFillIcon,
+  },
+  {
+    href: "/profile",
+    label: "پروفایل",
+    Icon: UserIcon,
+    FillIcon: UserFillIcon,
+  },
 ] as const;
 
 const CENTER_HOLE_MASK =
   "radial-gradient(circle 36px at 50% 0, transparent 0 36px, black 37px)";
 
+const ICON_SPRING = { type: "spring", stiffness: 500, damping: 30 } as const;
+
 export function BottomNav() {
+  const pathname = usePathname();
+  const activeIndex = NAV_ITEMS.findIndex((item) => item.href === pathname);
+  // grid-cols-5: items sit in columns 0,1,3,4 (column 2 is the empty center slot).
+  // The bar is dir="rtl", so the first grid column renders visually rightmost —
+  // flip the column index before turning it into a left-edge percentage.
+  const activeColumn = activeIndex === -1 ? -1 : activeIndex < 2 ? activeIndex : activeIndex + 1;
+  const visualColumn = 4 - activeColumn;
+  const indicatorLeft = ((visualColumn + 0.5) / 5) * 100;
+
   return (
     <nav
       className="fixed inset-x-0 bottom-0 z-50 h-17"
@@ -35,32 +65,94 @@ export function BottomNav() {
         }}
       />
 
+      <motion.span
+        aria-hidden="true"
+        className="-translate-x-1/2 absolute top-0 h-0.5 w-8 rounded-full bg-primary"
+        animate={{
+          left: `${indicatorLeft}%`,
+          opacity: activeColumn === -1 ? 0 : 1,
+        }}
+        transition={ICON_SPRING}
+      />
+
       <ul className="relative grid h-full grid-cols-5 items-center">
-        {NAV_ITEMS.slice(0, 2).map(({ href, label, Icon }) => (
-          <li key={href} className="flex justify-center">
-            <Link
-              href={href}
-              className="flex flex-col items-center gap-1.5 text-text"
-            >
-              <Icon className="h-5 w-5 text-primary" />
-              <span className="text-xs font-medium text-primary">{label}</span>
-            </Link>
-          </li>
-        ))}
+        {NAV_ITEMS.slice(0, 2).map(({ href, label, Icon, FillIcon }) => {
+          const isActive = pathname === href;
+          return (
+            <li key={href} className="flex justify-center">
+              <Link
+                href={href}
+                className="flex flex-col items-center gap-1.5 text-text"
+              >
+                <span className="relative flex h-5 w-5 items-center justify-center">
+                  <motion.span
+                    className="absolute inset-0"
+                    animate={{
+                      opacity: isActive ? 0 : 1,
+                      scale: isActive ? 0.75 : 1,
+                    }}
+                    transition={ICON_SPRING}
+                  >
+                    <Icon className="h-5 w-5 text-primary" />
+                  </motion.span>
+                  <motion.span
+                    className="absolute inset-0"
+                    animate={{
+                      opacity: isActive ? 1 : 0,
+                      scale: isActive ? 1 : 0.75,
+                    }}
+                    transition={ICON_SPRING}
+                  >
+                    <FillIcon className="h-5 w-5 text-primary" />
+                  </motion.span>
+                </span>
+                <span className="text-xs font-medium text-primary">
+                  {label}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
 
         <li aria-hidden="true" />
 
-        {NAV_ITEMS.slice(2).map(({ href, label, Icon }) => (
-          <li key={href} className="flex justify-center">
-            <Link
-              href={href}
-              className="flex flex-col items-center gap-1.5 text-text"
-            >
-              <Icon className="h-5 w-5 text-primary" />
-              <span className="text-xs font-medium text-primary">{label}</span>
-            </Link>
-          </li>
-        ))}
+        {NAV_ITEMS.slice(2).map(({ href, label, Icon, FillIcon }) => {
+          const isActive = pathname === href;
+          return (
+            <li key={href} className="flex justify-center">
+              <Link
+                href={href}
+                className="flex flex-col items-center gap-1.5 text-text"
+              >
+                <span className="relative flex h-5 w-5 items-center justify-center">
+                  <motion.span
+                    className="absolute inset-0"
+                    animate={{
+                      opacity: isActive ? 0 : 1,
+                      scale: isActive ? 0.75 : 1,
+                    }}
+                    transition={ICON_SPRING}
+                  >
+                    <Icon className="h-5 w-5 text-primary" />
+                  </motion.span>
+                  <motion.span
+                    className="absolute inset-0"
+                    animate={{
+                      opacity: isActive ? 1 : 0,
+                      scale: isActive ? 1 : 0.75,
+                    }}
+                    transition={ICON_SPRING}
+                  >
+                    <FillIcon className="h-5 w-5 text-primary" />
+                  </motion.span>
+                </span>
+                <span className="text-xs font-medium text-primary">
+                  {label}
+                </span>
+              </Link>
+            </li>
+          );
+        })}
       </ul>
 
       <motion.button

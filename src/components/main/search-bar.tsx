@@ -2,7 +2,7 @@ import { FilterIcon, SearchIcon } from "@/assets/icons";
 
 export function SearchBar() {
   return (
-    <div dir="ltr" className="flex items-center gap-3 px-4 pb-4 pt-2">
+    <div dir="ltr" className="flex items-center gap-3 px-4 py-4">
       <button
         type="button"
         aria-label="فیلترها"
